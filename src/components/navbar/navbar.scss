@@ -1,0 +1,23 @@
+.navbar{
+    display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding:10px 20px;
+     height: 70px;
+     border-bottom: 1px solid  lightgrey;
+    .left{
+        display: flex;
+        align-items: center;
+        span{
+            font-weight: bold;
+            font-size: 40px;
+            font-family:cursive ;
+            color: rgb(84, 27, 7);
+        }
+    }
+    .right{ 
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+}
