@@ -1,5 +1,4 @@
-import Summarizer from "./components/summarizer/Summarizer";
-import Reader from "./components/reader/Reader";
+
 import Navbar from "./components/navbar/navbar";
 import Leftbar from "./components/leftbar/leftbar";
 import {
@@ -7,8 +6,10 @@ import {
   
   Outlet,
   RouterProvider,
-  Routes,
+  // Routes,
 } from "react-router-dom";
+import SummarizerTwo from "./components/summarizer/SummarizerTwo";
+import TextReader from "./components/reader/TextReader";
 
 
 function App() {
@@ -35,11 +36,11 @@ function App() {
       children:[
       {
         path:"/reader",
-        element: <Reader/>
+        element: <TextReader/>
       },
       {
         path:"/summarizer",
-        element: <Summarizer/>
+        element: <SummarizerTwo/>
       }
       ]
     },
