@@ -1,8 +1,9 @@
+/* The code is importing necessary dependencies and components for the Leftbar component. */
 import React from 'react'
 import "./leftbar.scss"
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Leftbar = () => {
@@ -12,6 +13,7 @@ const Leftbar = () => {
     }
 
   return (
+        /* The code is defining a React component called `Leftbar`. */
         <div className = "leftBar">
             <div className = "container">
                 <div className='menu'>

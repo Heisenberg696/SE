@@ -1,3 +1,11 @@
+/**
+ * The `SummarizerTwo` function is a React component that allows users to input text or upload a PDF
+ * file, summarize the text using the OpenAI GPT-3.5 Turbo model, and export the summarized text as a
+ * PDF file.
+ * @returns The `SummarizerTwo` component is being returned.
+ */
+/* The `import` statements are used to import various dependencies and modules into the React
+component. */
 import React, { useState } from 'react';
 import styles from './playground.module.css';
 import { pdfjs } from 'react-pdf';
@@ -7,7 +15,12 @@ import axios from "axios"
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const SummarizerTwo = () => {
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState(localStorage.getItem('responseText'));
+
+  /**
+   * The function `handleFileInputChange` is an event handler that reads the content of a selected PDF
+   * file and converts it to text using pdfjs.
+   */
 
   const handleFileInputChange = async (event) => {
     const fileInput = event.target;
@@ -28,6 +41,11 @@ const SummarizerTwo = () => {
     }
   };
 
+/**
+ * The function `convertPdfToText` takes in a PDF data and converts it into text using the pdf.js
+ * library.
+ * @returns The function `convertPdfToText` returns a Promise.
+ */
   const convertPdfToText = (pdfData) => {
     return new Promise((resolve, reject) => {
       pdfjs.getDocument({ data: pdfData }).promise.then((pdf) => {
@@ -56,6 +74,10 @@ const SummarizerTwo = () => {
     });
   };
 
+  /**
+   * The  code is a JavaScript React function that uses the OpenAI API to summarize text and
+   * generate a PDF report.
+   */
   const handleSummarizeClick = async () => {
     try {
       const response = await axios.post(
@@ -67,7 +89,7 @@ const SummarizerTwo = () => {
 
             {
               role: "system",
-              content: "Summarize any text given to you"
+              content: "Please make this more concise and in a very accurate and very short summarized version"
             },
             {
               role: "user", content: inputText
@@ -76,7 +98,7 @@ const SummarizerTwo = () => {
         },
         {
           headers: {
-            Authorization: 'Bearer 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', // Replace with your API key
+            Authorization: 'Bearer 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', // Replace with your API key
           },
         }
       );
@@ -89,12 +111,19 @@ const SummarizerTwo = () => {
       if (summarizedTextArea) {
         summarizedTextArea.value = summarizedText;
       }
+      localStorage.setItem('responseText', '')
     } catch (error) {
       console.error('Error summarizing text:', error);
     }
+
+
   };
 
 
+  /**
+   * The `generatePDF` function takes the text from a textarea element, splits it into pages, and
+   * generates a PDF report with the text.
+   */
   const generatePDF = () => {
     try {
       const summarizedTextArea = document.getElementById('summarizedTextArea');
@@ -115,6 +144,8 @@ const SummarizerTwo = () => {
   };
   
 
+  /* The `return` statement in the code is returning a JSX (JavaScript XML) expression that represents
+  the structure and content of the React component. */
   return (
     <>
       <div className={styles.playground}>
@@ -122,7 +153,7 @@ const SummarizerTwo = () => {
           <div className={styles.textareaWrapper}>
             <textarea
               className={styles.textarea}
-              placeholder="Enter text here"
+              placeholder="Enter text to be summarised"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
             ></textarea>
@@ -147,7 +178,7 @@ const SummarizerTwo = () => {
             <textarea
               id="summarizedTextArea"
               className={styles.textarea}
-              placeholder="Summarised  text  here"
+              placeholder="Summarised  text appears   here"
             ></textarea>
           </div>
           <div className={styles.bottomArea}>
